@@ -1,0 +1,3 @@
+function printSomething(things) {
+	console.log("Message: " + things);
+}
