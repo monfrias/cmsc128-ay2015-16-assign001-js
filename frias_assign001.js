@@ -285,11 +285,24 @@ function wordsToCurrency(words, currency) {
 }
 
 function numberDelimited(number, delimiter, jumps) {
-	if(delimiter.length > 1) { 
+	if(delimiter.length != 1) { 
 		return "Invalid Input! (delimiter should be a single character only)"; 
 	} else if(number > 1000000 || number < 0) { 
-		return "Invalid input! (Out of Range)"; 
+		return "Invalid input! (Number Out of Range)"; 
+	} else if(jumps > number.length || jumps < 0) {
+		return "Invalid Input! (Number of jumps exceeded within number's length range)";
 	} else {
-		
+		var result = "";	//initialize result to null (string type)
+		var i;
+
+		for(i=0; i<(number.length-jumps); i+=1) {		//checks if ith index of number is not the number of jumps, then
+			result += number[i]; }						//append it to result
+
+		result += delimiter;							//when it reaches the number of jumps, then append the delimiter
+
+		for(i=(number.length-jumps); i<number.length; i+=1) {	//then it will just append the remaining characters of the string to result
+			result += number[i]; }
+
+		return result;
 	}
 }
